@@ -1,0 +1,82 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden; /* Prevent image from overflowing the body */
+  position: relative; /* Add relative positioning to body */
+}
+
+.container {
+  position: relative;
+}
+
+.chocolate-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg); /* Initial position and rotation */
+  width: 280px; /* Adjust the width of the chocolate image */
+  height: auto; /* Maintain aspect ratio */
+  z-index: 1; /* Ensure chocolate image stays above background image */
+  animation: tiltAnimation 5s infinite alternate; /* Tilt animation */
+}
+
+.message {
+  position: absolute;
+  top: calc(50% + 100px); /* Adjust the distance from the top */
+  left: 50%;
+  transform: translateX(-50%) scale(1); /* Initial scale */
+  text-align: center;
+  white-space: nowrap; /* Prevent text from wrapping */
+  font-size: 24px; /* Adjust font size as needed */
+  animation: zoomInOut 5s infinite alternate, rainbowText 10s infinite; /* Zoom in and out and Rainbow animation */
+  animation-timing-function: ease-in-out; /* Ensure smooth animation */
+}
+
+/* Rainbow animation */
+@keyframes rainbowText {
+  0% { color: #ff0000; } /* Red */
+  16.67% { color: #ff7f00; } /* Orange */
+  33.33% { color: #ffff00; } /* Yellow */
+  50% { color: #00ff00; } /* Green */
+  66.67% { color: #0000ff; } /* Blue */
+  83.33% { color: #4b0082; } /* Indigo */
+  100% { color: #9400d3; } /* Violet */
+}
+
+/* Zoom in and out animation */
+@keyframes zoomInOut {
+  0%, 100% { transform: translateX(-50%) scale(1); } /* Initial and final state */
+  50% { transform: translateX(-50%) scale(1.2); } /* Zoom in state */
+}
+
+/* Tilt animation */
+@keyframes tiltAnimation {
+  0%, 100% { transform: translate(-50%, -50%) rotate(-5deg); } /* Initial and final state */
+  50% { transform: translate(-50%, -50%) rotate(5deg); } /* Tilt left */
+}
+
+/* Random background image */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Ensure background stays behind everything */
+  background-image: url('background.png'); /* Path to your background image */
+  background-repeat: no-repeat;
+  background-size: contain; /* Ensure the entire background image is visible */
+  background-position: center; /* Center the background image */
+  opacity: 0.3; /* Adjust opacity as needed */
+  pointer-events: none; /* Allow clicks to pass through */
+}
+
+/* Random positioning */
+body {
+  --random-x: calc(1 - 2 * random());
+  --random-y: calc(1 - 2 * random());
+}
